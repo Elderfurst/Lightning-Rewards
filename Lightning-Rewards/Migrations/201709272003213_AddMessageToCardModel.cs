@@ -1,0 +1,18 @@
+namespace Lightning_Rewards.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AddMessageToCardModel : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Cards", "Message", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Cards", "Message");
+        }
+    }
+}

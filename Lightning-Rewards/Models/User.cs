@@ -23,7 +23,7 @@ namespace Lightning_Rewards.Models
 
         public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         public virtual ICollection<Card> CreatedCards { get; set; }
         

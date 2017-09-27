@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Lightning_Rewards.Models
 {
@@ -10,6 +11,8 @@ namespace Lightning_Rewards.Models
         public long Id { get; set; }
 
         public string LetterValue { get; set; }
+
+        public string Message { get; set; }
 
         public long CreatedByUserId { get; set; }
 
@@ -21,6 +24,12 @@ namespace Lightning_Rewards.Models
 
         public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
+        [JsonIgnore]
+        public virtual User CreatedByUser { get; set; }
+        [JsonIgnore]
+        public virtual User ReceivedByUser { get; set; }
+        [JsonIgnore]
+        public virtual User ManagedByUser { get; set; }
     }
 }
