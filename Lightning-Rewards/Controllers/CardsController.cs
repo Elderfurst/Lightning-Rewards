@@ -8,18 +8,25 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Lightning_Rewards.Managers;
 using Lightning_Rewards.Models;
 
 namespace Lightning_Rewards.Controllers
 {
     public class CardsController : ApiController
     {
-        private Lightning_RewardsContext db = new Lightning_RewardsContext();
+        private readonly Lightning_RewardsContext db = new Lightning_RewardsContext();
+        private readonly ICardManager _cardManager;
 
-        // GET: api/Cards
-        public IQueryable<Card> GetCards()
+        public CardsController(ICardManager cardManager)
         {
-            return db.Cards.Include(c => c.CreatedByUser).Include(c => c.ReceivedByUser).Include(c => c.ManagedByUser);
+            _cardManager = cardManager;
+        }
+
+        [Route("api/Cards/pending")]
+        public IQueryable<Card> GetPendingCardsDetails(int userId)
+        {
+            return _cardManager.GetPendingCardDetails(userId);
         }
 
         // GET: api/Cards/5

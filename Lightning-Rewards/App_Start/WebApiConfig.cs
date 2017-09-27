@@ -15,6 +15,8 @@ namespace Lightning_Rewards
             // Web API configuration and services
             var container = new UnityContainer();
             container.RegisterType<IUserManager, UserManager>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDashboardManager, DashboardManager>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICardManager, CardManager>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             // Web API routes
             config.MapHttpAttributeRoutes();

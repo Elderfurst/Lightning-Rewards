@@ -7,10 +7,8 @@ using Lightning_Rewards.Models;
 
 namespace Lightning_Rewards.Managers
 {
-    public interface IUserManager
+    public interface ICardManager
     {
-        User LoadUser(int userId);
-
-        User AuthenticateUser(string email, string password);
+        IQueryable<Card> GetPendingCardDetails(int userId);
     }
 }

@@ -7,10 +7,8 @@ using Lightning_Rewards.Models;
 
 namespace Lightning_Rewards.Managers
 {
-    public interface IUserManager
+    public interface IDashboardManager
     {
-        User LoadUser(int userId);
-
-        User AuthenticateUser(string email, string password);
+        Dashboard GetDashboard(long userId);
     }
 }

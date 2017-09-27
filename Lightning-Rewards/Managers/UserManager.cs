@@ -17,6 +17,11 @@ namespace Lightning_Rewards.Managers
             _db = db;
         }
 
+        public User LoadUser(int userId)
+        {
+            return _db.Users.First(x => x.Id == userId);
+        }
+
         public User AuthenticateUser(string email, string password)
         {
             return _db.Users.First(x => x.Email == email && x.Password == password);

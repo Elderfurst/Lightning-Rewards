@@ -173,6 +173,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\CardManager.cs" />
+    <Compile Include="Managers\DashboardManager.cs" />
+    <Compile Include="Managers\ICardManager.cs" />
+    <Compile Include="Managers\IDashboardManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Migrations\201709271613142_Intitial.cs" />
@@ -194,6 +198,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationRequest.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\Lightning_RewardsContext.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Models\User.cs" />
