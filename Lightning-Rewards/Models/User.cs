@@ -7,22 +7,28 @@ namespace Lightning_Rewards.Models
 {
     public class User
     {
-        public long Id;
+        public long Id { get; set; }
 
-        public string Password;
+        public string Password { get; set; }
 
-        public string FirstName;
+        public string FirstName { get; set; }
 
-        public string LastName;
+        public string LastName { get; set; }
 
-        public string Email;
+        public string Email { get; set; }
 
-        public bool IsManager;
+        public bool IsManager { get; set; }
 
-        public bool IsAdmin;
+        public bool IsAdmin { get; set; }
 
-        public DateTime DateCreated;
+        public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified;
+        public DateTime DateModified { get; set; }
+
+        public virtual ICollection<Card> CreatedCards { get; set; }
+        
+        public virtual ICollection<Card> ReceivedCards { get; set; }
+
+        public virtual ICollection<Card> ManagedCards { get; set; }
     }
 }

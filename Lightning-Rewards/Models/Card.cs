@@ -7,20 +7,20 @@ namespace Lightning_Rewards.Models
 {
     public class Card
     {
-        public long Id;
+        public long Id { get; set; }
 
-        public string LetterValue;
+        public string LetterValue { get; set; }
 
-        public long CreatedByUserId;
+        public long CreatedByUserId { get; set; }
 
-        public long RecipientUserId;
+        public long RecipientUserId { get; set; }
 
-        public long ManagerUserId;
+        public long ManagerUserId { get; set; }
 
-        public string CardStatus;
+        public string CardStatus { get; set; }
 
-        public DateTime DateCreated;
+        public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified;
+        public DateTime DateModified { get; set; }
     }
 }
