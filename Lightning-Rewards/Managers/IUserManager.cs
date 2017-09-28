@@ -14,5 +14,9 @@ namespace Lightning_Rewards.Managers
         User AuthenticateUser(string email, string password);
 
         IQueryable<UserLite> GetUsersAutocomplete(string query);
+
+        IQueryable<UserLite> GetManagers();
+
+        bool UserIsManager(long userId);
     }
 }

@@ -35,5 +35,45 @@ namespace Lightning_Rewards.Managers
             _db.Cards.First(c => c.Id == cardId).CardStatus = "PAC";
             _db.SaveChanges();
         }
+
+        public Card CreateCard(CardRequest request)
+        {
+            var userManager = new UserManager(_db);
+            var card = new Card
+            {
+                LetterValue = GenerateLetter(),
+                Message = request.Message,
+                CreatedByUserId = request.SenderId,
+                RecipientUserId = request.ReceiverId,
+                ManagerUserId = request.ManagerId,
+                CardStatus = userManager.UserIsManager(request.SenderId) ? "PAC" : "PAP",
+                DateCreated = DateTime.Now
+            };
+            _db.Cards.Add(card);
+            _db.SaveChanges();
+            return card;
+        }
+
+        private string GenerateLetter()
+        {
+            var random = new Random();
+            var number = random.Next(6);
+
+            switch (number)
+            {
+                case 0:
+                    return "R";
+                case 1:
+                    return "E";
+                case 2:
+                    return "L";
+                case 3:
+                    return "I";
+                case 4:
+                    return "A";
+                default:
+                    return "S";
+            }
+        }
     }
 }

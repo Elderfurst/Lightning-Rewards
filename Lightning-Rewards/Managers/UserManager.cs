@@ -35,5 +35,19 @@ namespace Lightning_Rewards.Managers
                 Name = u.FirstName + " " + u.LastName
             }).Where(ul => ul.Name.Contains(query));
         }
+
+        public IQueryable<UserLite> GetManagers()
+        {
+            return _db.Users.Where(u => u.IsManager).Select(u => new UserLite
+            {
+                Id = u.Id,
+                Name = u.FirstName + " " + u.LastName
+            });
+        }
+
+        public bool UserIsManager(long userId)
+        {
+            return _db.Users.Count(u => u.Id == userId && u.IsManager) > 0;
+        }
     }
 }

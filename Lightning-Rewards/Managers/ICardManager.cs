@@ -16,5 +16,7 @@ namespace Lightning_Rewards.Managers
         void ClaimCard(int cardId);
 
         void ApproveCard(int cardId);
+
+        Card CreateCard(CardRequest request);
     }
 }

@@ -28,5 +28,11 @@ namespace Lightning_Rewards.Controllers
         {
             return _userManager.GetUsersAutocomplete(query);
         }
+
+        [Route("api/Users/Managers")]
+        public IQueryable<UserLite> GetManagers()
+        {
+            return _userManager.GetManagers();
+        }
     }
 }

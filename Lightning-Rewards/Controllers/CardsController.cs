@@ -46,5 +46,11 @@ namespace Lightning_Rewards.Controllers
         {
             _cardManager.ApproveCard(cardId);
         }
+
+        public IHttpActionResult PostCard([FromBody] CardRequest card)
+        {
+            var newCard = _cardManager.CreateCard(card);
+            return Ok(newCard);
+        }
     }
 }
