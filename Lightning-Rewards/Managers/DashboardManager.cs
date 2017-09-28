@@ -16,6 +16,11 @@ namespace Lightning_Rewards.Managers
         }
         public Dashboard GetDashboard(long userId)
         {
+            var userManager = new UserManager(_db);
+            if (!userManager.UserExists(userId))
+            {
+                return null;
+            }
             Dictionary<string, int> letters = new Dictionary<string, int>();
             var cards = _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "ACC");
             foreach (var card in cards)

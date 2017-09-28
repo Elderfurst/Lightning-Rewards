@@ -57,6 +57,12 @@ namespace Lightning_Rewards.Controllers
             return Ok(card);
         }
 
+        [Route("api/Cards/Approve/All")]
+        public IQueryable<Card> PutApproveAllCards(long managerId)
+        {
+            return _cardManager.ApproveAllCards(managerId);
+        }
+
         public IHttpActionResult PostCard([FromBody] CardRequest card)
         {
             var newCard = _cardManager.CreateCard(card);
