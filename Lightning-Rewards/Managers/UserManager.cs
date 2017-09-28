@@ -26,5 +26,14 @@ namespace Lightning_Rewards.Managers
         {
             return _db.Users.First(x => x.Email == email && x.Password == password);
         }
+
+        public IQueryable<UserLite> GetUsersAutocomplete(string query)
+        {
+            return _db.Users.Select(u => new UserLite
+            {
+                Id = u.Id,
+                Name = u.FirstName + " " + u.LastName
+            }).Where(ul => ul.Name.Contains(query));
+        }
     }
 }

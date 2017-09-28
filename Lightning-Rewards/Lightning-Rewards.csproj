@@ -202,6 +202,7 @@
     <Compile Include="Models\Lightning_RewardsContext.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
