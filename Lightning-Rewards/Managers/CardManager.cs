@@ -29,5 +29,11 @@ namespace Lightning_Rewards.Managers
             _db.Cards.First(c => c.Id == cardId).CardStatus = "ACC";
             _db.SaveChanges();
         }
+
+        public void ApproveCard(int cardId)
+        {
+            _db.Cards.First(c => c.Id == cardId).CardStatus = "PAC";
+            _db.SaveChanges();
+        }
     }
 }

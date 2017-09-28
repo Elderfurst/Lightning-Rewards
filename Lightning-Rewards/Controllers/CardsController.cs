@@ -40,97 +40,11 @@ namespace Lightning_Rewards.Controllers
         {
             _cardManager.ClaimCard(cardId);
         }
-        // GET: api/Cards/5
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult GetCard(long id)
+
+        [Route("api/Cards/Approve")]
+        public void PutApproveCard(int cardId)
         {
-            Card card = db.Cards.Find(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(card);
-        }
-
-        // PUT: api/Cards/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCard(long id, Card card)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != card.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(card).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Cards
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult PostCard(Card card)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Cards.Add(card);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = card.Id }, card);
-        }
-
-        // DELETE: api/Cards/5
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult DeleteCard(long id)
-        {
-            Card card = db.Cards.Find(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-
-            db.Cards.Remove(card);
-            db.SaveChanges();
-
-            return Ok(card);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CardExists(long id)
-        {
-            return db.Cards.Count(e => e.Id == id) > 0;
+            _cardManager.ApproveCard(cardId);
         }
     }
 }
