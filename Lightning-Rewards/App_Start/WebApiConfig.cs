@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Lightning_Rewards.Models;
 using Microsoft.Practices.Unity;
 using Lightning_Rewards.Managers;
@@ -12,6 +13,8 @@ namespace Lightning_Rewards
     {
         public static void Register(HttpConfiguration config)
         {
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
             // Web API configuration and services
             var container = new UnityContainer();
             container.RegisterType<IUserManager, UserManager>(new HierarchicalLifetimeManager());
