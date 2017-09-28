@@ -17,7 +17,7 @@ namespace Lightning_Rewards.Managers
             _db = db;
         }
 
-        public User LoadUser(int userId)
+        public User LoadUser(long userId)
         {
             return _db.Users.First(x => x.Id == userId);
         }

@@ -24,25 +24,25 @@ namespace Lightning_Rewards.Controllers
         }
 
         [Route("api/Cards/Pending/Receipt")]
-        public IQueryable<Card> GetPendingCardsDetails(int userId)
+        public IQueryable<Card> GetPendingCardsDetails(long userId)
         {
             return _cardManager.GetPendingCardDetails(userId);
         }
 
         [Route("api/Cards/Pending/Approval")]
-        public IQueryable<Card> GetPendingApprovalsDetails(int userId)
+        public IQueryable<Card> GetPendingApprovalsDetails(long userId)
         {
             return _cardManager.GetPendingApprovalsDetails(userId);
         }
 
         [Route("api/Cards/Claim")]
-        public void PutClaimCard(int cardId)
+        public void PutClaimCard(long cardId)
         {
             _cardManager.ClaimCard(cardId);
         }
 
         [Route("api/Cards/Approve")]
-        public void PutApproveCard(int cardId)
+        public void PutApproveCard(long cardId)
         {
             _cardManager.ApproveCard(cardId);
         }
@@ -51,6 +51,17 @@ namespace Lightning_Rewards.Controllers
         {
             var newCard = _cardManager.CreateCard(card);
             return Ok(newCard);
+        }
+
+        [Route("api/Cards/Redeem")]
+        public IHttpActionResult PutRedeemCards(long userId)
+        {
+            var redemptionCode = _cardManager.RedeemCards(userId);
+            if (redemptionCode == null)
+            {
+                return BadRequest();
+            }
+            return Ok(redemptionCode);
         }
     }
 }

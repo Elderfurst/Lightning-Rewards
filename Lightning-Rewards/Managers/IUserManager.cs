@@ -9,7 +9,7 @@ namespace Lightning_Rewards.Managers
 {
     public interface IUserManager
     {
-        User LoadUser(int userId);
+        User LoadUser(long userId);
 
         User AuthenticateUser(string email, string password);
 
