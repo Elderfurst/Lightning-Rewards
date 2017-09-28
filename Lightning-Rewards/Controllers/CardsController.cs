@@ -36,20 +36,34 @@ namespace Lightning_Rewards.Controllers
         }
 
         [Route("api/Cards/Claim")]
-        public void PutClaimCard(long cardId)
+        public IHttpActionResult PutClaimCard(long cardId)
         {
-            _cardManager.ClaimCard(cardId);
+            var card = _cardManager.ClaimCard(cardId);
+            if (card == null)
+            {
+                return BadRequest();
+            }
+            return Ok(card);
         }
 
         [Route("api/Cards/Approve")]
-        public void PutApproveCard(long cardId)
+        public IHttpActionResult PutApproveCard(long cardId)
         {
-            _cardManager.ApproveCard(cardId);
+            var card = _cardManager.ApproveCard(cardId);
+            if (card == null)
+            {
+                return BadRequest();
+            }
+            return Ok(card);
         }
 
         public IHttpActionResult PostCard([FromBody] CardRequest card)
         {
             var newCard = _cardManager.CreateCard(card);
+            if (newCard == null)
+            {
+                return BadRequest();
+            }
             return Ok(newCard);
         }
 

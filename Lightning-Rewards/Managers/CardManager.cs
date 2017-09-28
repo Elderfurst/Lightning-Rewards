@@ -24,21 +24,36 @@ namespace Lightning_Rewards.Managers
             return _db.Cards.Where(c => c.ManagerUserId == userId && c.CardStatus == "PAP");
         }
 
-        public void ClaimCard(long cardId)
+        public Card ClaimCard(long cardId)
         {
-            _db.Cards.First(c => c.Id == cardId).CardStatus = "ACC";
-            _db.SaveChanges();
+            var card = _db.Cards.FirstOrDefault(c => c.Id == cardId);
+            if (card != null)
+            {
+                card.CardStatus = "ACC";
+                _db.SaveChanges();
+            }
+            return card;
         }
 
-        public void ApproveCard(long cardId)
+        public Card ApproveCard(long cardId)
         {
-            _db.Cards.First(c => c.Id == cardId).CardStatus = "PAC";
-            _db.SaveChanges();
+            var card =_db.Cards.FirstOrDefault(c => c.Id == cardId);
+            if (card != null)
+            {
+                card.CardStatus = "PAC";
+                _db.SaveChanges();
+            }
+            return card;
         }
 
         public Card CreateCard(CardRequest request)
         {
             var userManager = new UserManager(_db);
+            if (!userManager.UserExists(request.SenderId) || !userManager.UserExists(request.ReceiverId) ||
+                !userManager.UserExists(request.ManagerId))
+            {
+                return null;
+            }
             var card = new Card
             {
                 LetterValue = GenerateLetter(),

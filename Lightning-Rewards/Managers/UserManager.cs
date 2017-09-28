@@ -17,11 +17,6 @@ namespace Lightning_Rewards.Managers
             _db = db;
         }
 
-        public User LoadUser(long userId)
-        {
-            return _db.Users.First(x => x.Id == userId);
-        }
-
         public AuthenticatedUser AuthenticateUser(string email, string password)
         {
             return _db.Users.Select(u => new AuthenticatedUser
@@ -59,6 +54,11 @@ namespace Lightning_Rewards.Managers
         public bool UserIsManager(long userId)
         {
             return _db.Users.Count(u => u.Id == userId && u.IsManager) > 0;
+        }
+
+        public bool UserExists(long userId)
+        {
+            return _db.Users.Count(u => u.Id == userId) > 0;
         }
     }
 }

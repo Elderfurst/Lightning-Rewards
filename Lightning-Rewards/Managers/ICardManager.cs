@@ -13,9 +13,9 @@ namespace Lightning_Rewards.Managers
 
         IQueryable<Card> GetPendingApprovalsDetails(long userId);
 
-        void ClaimCard(long cardId);
+        Card ClaimCard(long cardId);
 
-        void ApproveCard(long cardId);
+        Card ApproveCard(long cardId);
 
         Card CreateCard(CardRequest request);
 

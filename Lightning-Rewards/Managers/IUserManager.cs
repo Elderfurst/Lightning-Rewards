@@ -9,8 +9,6 @@ namespace Lightning_Rewards.Managers
 {
     public interface IUserManager
     {
-        User LoadUser(long userId);
-
         AuthenticatedUser AuthenticateUser(string email, string password);
 
         IQueryable<UserLite> GetUsersAutocomplete(string query);
@@ -18,5 +16,7 @@ namespace Lightning_Rewards.Managers
         IQueryable<UserLite> GetManagers();
 
         bool UserIsManager(long userId);
+
+        bool UserExists(long userId);
     }
 }
