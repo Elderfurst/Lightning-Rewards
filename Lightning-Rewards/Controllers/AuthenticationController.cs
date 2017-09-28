@@ -23,7 +23,7 @@ namespace Lightning_Rewards.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult PostAuthentication([FromBody] AuthenticationRequest data)
         {
-            User user = _userManager.AuthenticateUser(data.Email, data.Password);
+            AuthenticatedUser user = _userManager.AuthenticateUser(data.Email, data.Password);
             if (user == null)
             {
                 return Unauthorized();

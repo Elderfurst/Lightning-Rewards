@@ -22,9 +22,20 @@ namespace Lightning_Rewards.Managers
             return _db.Users.First(x => x.Id == userId);
         }
 
-        public User AuthenticateUser(string email, string password)
+        public AuthenticatedUser AuthenticateUser(string email, string password)
         {
-            return _db.Users.First(x => x.Email == email && x.Password == password);
+            return _db.Users.Select(u => new AuthenticatedUser
+            {
+                Id = u.Id,
+                Password = u.Password,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                IsManager = u.IsManager,
+                IsAdmin = u.IsAdmin,
+                DateCreated = u.DateCreated,
+                DateModified = u.DateModified
+            }).FirstOrDefault(x => x.Email == email && x.Password == password);
         }
 
         public IQueryable<UserLite> GetUsersAutocomplete(string query)

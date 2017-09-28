@@ -11,7 +11,7 @@ namespace Lightning_Rewards.Managers
     {
         User LoadUser(long userId);
 
-        User AuthenticateUser(string email, string password);
+        AuthenticatedUser AuthenticateUser(string email, string password);
 
         IQueryable<UserLite> GetUsersAutocomplete(string query);
 
