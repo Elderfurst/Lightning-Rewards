@@ -94,15 +94,16 @@ namespace Lightning_Rewards.Managers
             _db.SaveChanges();
         }
 
-        public IQueryable<Card> ApproveAllCards(long managerId)
+        public List<Card> ApproveAllCards(long managerId)
         {
             var allCards = _db.Cards.Where(c => c.ManagerUserId == managerId && c.CardStatus == "PAP");
+            var returnList = allCards.ToList();
             foreach (var card in allCards)
             {
                 card.CardStatus = "PAC";
             }
             _db.SaveChanges();
-            return _db.Cards.Where(c => c.ManagerUserId == managerId && c.CardStatus == "PAC");
+            return returnList;
         }
 
         private string GenerateLetter()

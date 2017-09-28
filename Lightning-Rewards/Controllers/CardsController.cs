@@ -58,7 +58,7 @@ namespace Lightning_Rewards.Controllers
         }
 
         [Route("api/Cards/Approve/All")]
-        public IQueryable<Card> PutApproveAllCards(long managerId)
+        public List<Card> PutApproveAllCards(long managerId)
         {
             return _cardManager.ApproveAllCards(managerId);
         }

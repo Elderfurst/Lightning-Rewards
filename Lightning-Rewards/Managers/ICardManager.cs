@@ -21,6 +21,6 @@ namespace Lightning_Rewards.Managers
 
         string RedeemCards(long userId);
 
-        IQueryable<Card> ApproveAllCards(long managerId);
+        List<Card> ApproveAllCards(long managerId);
     }
 }
