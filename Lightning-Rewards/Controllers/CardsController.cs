@@ -24,13 +24,13 @@ namespace Lightning_Rewards.Controllers
         }
 
         [Route("api/Cards/Pending/Receipt")]
-        public IQueryable<Card> GetPendingCardsDetails(long userId)
+        public IQueryable<CardLite> GetPendingCardsDetails(long userId)
         {
             return _cardManager.GetPendingCardDetails(userId);
         }
 
         [Route("api/Cards/Pending/Approval")]
-        public IQueryable<Card> GetPendingApprovalsDetails(long userId)
+        public IQueryable<CardLite> GetPendingApprovalsDetails(long userId)
         {
             return _cardManager.GetPendingApprovalsDetails(userId);
         }
@@ -58,7 +58,7 @@ namespace Lightning_Rewards.Controllers
         }
 
         [Route("api/Cards/Approve/All")]
-        public IQueryable<Card> PutApproveAllCards(long managerId)
+        public List<Card> PutApproveAllCards(long managerId)
         {
             return _cardManager.ApproveAllCards(managerId);
         }

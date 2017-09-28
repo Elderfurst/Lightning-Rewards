@@ -14,14 +14,26 @@ namespace Lightning_Rewards.Managers
         {
             _db = db;
         }
-        public IQueryable<Card> GetPendingCardDetails(long userId)
+        public IQueryable<CardLite> GetPendingCardDetails(long userId)
         {
-            return _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "PAC");
+            return _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "PAC").Select(c => new CardLite
+            {
+                Id = c.Id,
+                Message = c.Message,
+                LetterValue = c.LetterValue,
+                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName
+            });
         }
 
-        public IQueryable<Card> GetPendingApprovalsDetails(long userId)
+        public IQueryable<CardLite> GetPendingApprovalsDetails(long userId)
         {
-            return _db.Cards.Where(c => c.ManagerUserId == userId && c.CardStatus == "PAP");
+            return _db.Cards.Where(c => c.ManagerUserId == userId && c.CardStatus == "PAP").Select(c => new CardLite
+            {
+                Id = c.Id,
+                Message = c.Message,
+                LetterValue = c.LetterValue,
+                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName
+            });
         }
 
         public Card ClaimCard(long cardId)
@@ -94,15 +106,16 @@ namespace Lightning_Rewards.Managers
             _db.SaveChanges();
         }
 
-        public IQueryable<Card> ApproveAllCards(long managerId)
+        public List<Card> ApproveAllCards(long managerId)
         {
             var allCards = _db.Cards.Where(c => c.ManagerUserId == managerId && c.CardStatus == "PAP");
+            var returnList = allCards.ToList();
             foreach (var card in allCards)
             {
                 card.CardStatus = "PAC";
             }
             _db.SaveChanges();
-            return _db.Cards.Where(c => c.ManagerUserId == managerId && c.CardStatus == "PAC");
+            return returnList;
         }
 
         private string GenerateLetter()
