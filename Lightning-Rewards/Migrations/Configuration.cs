@@ -28,7 +28,8 @@ namespace Lightning_Rewards.Migrations
             context.Cards.AddOrUpdate(
                 c => c.Message,
                 new Card() { LetterValue = "R", Message = "To Nick", CreatedByUserId = 3, RecipientUserId = 1, ManagerUserId = 5, CardStatus = "ACC", DateCreated = DateTime.Now},
-                new Card() { LetterValue = "E", Message = "To Nick Again", CreatedByUserId = 3, RecipientUserId = 1, ManagerUserId = 5, CardStatus = "PAC", DateCreated = DateTime.Now }
+                new Card() { LetterValue = "E", Message = "To Nick Again", CreatedByUserId = 3, RecipientUserId = 1, ManagerUserId = 5, CardStatus = "PAC", DateCreated = DateTime.Now },
+                new Card() { LetterValue = "L", Message = "To William", CreatedByUserId = 1, RecipientUserId = 3, ManagerUserId = 5, CardStatus = "PAP", DateCreated = DateTime.Now }
                 );
         }
     }

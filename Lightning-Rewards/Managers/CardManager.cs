@@ -18,5 +18,16 @@ namespace Lightning_Rewards.Managers
         {
             return _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "PAC");
         }
+
+        public IQueryable<Card> GetPendingApprovalsDetails(int userId)
+        {
+            return _db.Cards.Where(c => c.ManagerUserId == userId && c.CardStatus == "PAP");
+        }
+
+        public void ClaimCard(int cardId)
+        {
+            _db.Cards.First(c => c.Id == cardId).CardStatus = "ACC";
+            _db.SaveChanges();
+        }
     }
 }

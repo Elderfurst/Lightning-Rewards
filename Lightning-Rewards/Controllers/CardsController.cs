@@ -23,12 +23,23 @@ namespace Lightning_Rewards.Controllers
             _cardManager = cardManager;
         }
 
-        [Route("api/Cards/pending")]
+        [Route("api/Cards/Pending/Receipt")]
         public IQueryable<Card> GetPendingCardsDetails(int userId)
         {
             return _cardManager.GetPendingCardDetails(userId);
         }
 
+        [Route("api/Cards/Pending/Approval")]
+        public IQueryable<Card> GetPendingApprovalsDetails(int userId)
+        {
+            return _cardManager.GetPendingApprovalsDetails(userId);
+        }
+
+        [Route("api/Cards/Claim")]
+        public void PutClaimCard(int cardId)
+        {
+            _cardManager.ClaimCard(cardId);
+        }
         // GET: api/Cards/5
         [ResponseType(typeof(Card))]
         public IHttpActionResult GetCard(long id)
