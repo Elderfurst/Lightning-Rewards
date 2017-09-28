@@ -9,8 +9,14 @@ namespace Lightning_Rewards.Managers
 {
     public interface IUserManager
     {
-        User LoadUser(int userId);
+        AuthenticatedUser AuthenticateUser(string email, string password);
 
-        User AuthenticateUser(string email, string password);
+        IQueryable<UserLite> GetUsersAutocomplete(string query);
+
+        IQueryable<UserLite> GetManagers();
+
+        bool UserIsManager(long userId);
+
+        bool UserExists(long userId);
     }
 }

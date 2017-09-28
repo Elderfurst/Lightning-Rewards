@@ -198,10 +198,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationRequest.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\CardRequest.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\Lightning_RewardsContext.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserLite.cs" />
+    <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\LightningRewards - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709271613142_Intitial.resx">

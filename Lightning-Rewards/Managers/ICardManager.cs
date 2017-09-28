@@ -9,6 +9,18 @@ namespace Lightning_Rewards.Managers
 {
     public interface ICardManager
     {
-        IQueryable<Card> GetPendingCardDetails(int userId);
+        IQueryable<Card> GetPendingCardDetails(long userId);
+
+        IQueryable<Card> GetPendingApprovalsDetails(long userId);
+
+        Card ClaimCard(long cardId);
+
+        Card ApproveCard(long cardId);
+
+        Card CreateCard(CardRequest request);
+
+        string RedeemCards(long userId);
+
+        IQueryable<Card> ApproveAllCards(long managerId);
     }
 }

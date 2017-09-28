@@ -23,103 +23,65 @@ namespace Lightning_Rewards.Controllers
             _cardManager = cardManager;
         }
 
-        [Route("api/Cards/pending")]
-        public IQueryable<Card> GetPendingCardsDetails(int userId)
+        [Route("api/Cards/Pending/Receipt")]
+        public IQueryable<Card> GetPendingCardsDetails(long userId)
         {
             return _cardManager.GetPendingCardDetails(userId);
         }
 
-        // GET: api/Cards/5
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult GetCard(long id)
+        [Route("api/Cards/Pending/Approval")]
+        public IQueryable<Card> GetPendingApprovalsDetails(long userId)
         {
-            Card card = db.Cards.Find(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(card);
+            return _cardManager.GetPendingApprovalsDetails(userId);
         }
 
-        // PUT: api/Cards/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCard(long id, Card card)
+        [Route("api/Cards/Claim")]
+        public IHttpActionResult PutClaimCard(long cardId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != card.Id)
+            var card = _cardManager.ClaimCard(cardId);
+            if (card == null)
             {
                 return BadRequest();
             }
-
-            db.Entry(card).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Cards
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult PostCard(Card card)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Cards.Add(card);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = card.Id }, card);
-        }
-
-        // DELETE: api/Cards/5
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult DeleteCard(long id)
-        {
-            Card card = db.Cards.Find(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-
-            db.Cards.Remove(card);
-            db.SaveChanges();
-
             return Ok(card);
         }
 
-        protected override void Dispose(bool disposing)
+        [Route("api/Cards/Approve")]
+        public IHttpActionResult PutApproveCard(long cardId)
         {
-            if (disposing)
+            var card = _cardManager.ApproveCard(cardId);
+            if (card == null)
             {
-                db.Dispose();
+                return BadRequest();
             }
-            base.Dispose(disposing);
+            return Ok(card);
         }
 
-        private bool CardExists(long id)
+        [Route("api/Cards/Approve/All")]
+        public IQueryable<Card> PutApproveAllCards(long managerId)
         {
-            return db.Cards.Count(e => e.Id == id) > 0;
+            return _cardManager.ApproveAllCards(managerId);
+        }
+
+        public IHttpActionResult PostCard([FromBody] CardRequest card)
+        {
+            var newCard = _cardManager.CreateCard(card);
+            if (newCard == null)
+            {
+                return BadRequest();
+            }
+            return Ok(newCard);
+        }
+
+        [Route("api/Cards/Redeem")]
+        public IHttpActionResult PutRedeemCards(long userId)
+        {
+            var redemptionCode = _cardManager.RedeemCards(userId);
+            if (redemptionCode == null)
+            {
+                return BadRequest();
+            }
+            return Ok(redemptionCode);
         }
     }
 }

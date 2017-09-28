@@ -24,6 +24,10 @@ namespace Lightning_Rewards.Controllers
         public IHttpActionResult GetDashboard(long userId)
         {
             Dashboard dashboard = _dashboardManager.GetDashboard(userId);
+            if (dashboard == null)
+            {
+                return BadRequest();
+            }
             return Ok(dashboard);
         }
     }
