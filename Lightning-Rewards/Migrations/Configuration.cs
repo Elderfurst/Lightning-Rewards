@@ -1,3 +1,5 @@
+using Lightning_Rewards.Models;
+
 namespace Lightning_Rewards.Migrations
 {
     using System;
@@ -15,17 +17,19 @@ namespace Lightning_Rewards.Migrations
         protected override void Seed(Lightning_Rewards.Models.Lightning_RewardsContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Users.AddOrUpdate(
+                u => u.Email,
+                new User() { Password = "training", FirstName = "Nick", LastName = "Anderson", Email = "nanderson@reliaslearning.com", IsManager = false, IsAdmin = false, DateCreated = DateTime.Now, DateModified = null },
+                new User() { Password = "training", FirstName = "William", LastName = "Coleman", Email = "wcoleman@reliaslearning.com", IsManager = false, IsAdmin = false, DateCreated = DateTime.Now, DateModified = null },
+                new User() { Password = "training", FirstName = "Lindsey", LastName = "Adams", Email = "ladams@reliaslearning.com", IsManager = false, IsAdmin = false, DateCreated = DateTime.Now, DateModified = null },
+                new User() { Password = "training", FirstName = "Dave", LastName = "Long", Email = "dlong@reliaslearning.com", IsManager = true, IsAdmin = false, DateCreated = DateTime.Now, DateModified = null },
+                new User() { Password = "training", FirstName = "Shaun", LastName = "Blair", Email = "sblair@reliaslearning.com", IsManager = true, IsAdmin = false, DateCreated = DateTime.Now, DateModified = null }
+                );
+            context.Cards.AddOrUpdate(
+                c => c.Message,
+                new Card() { LetterValue = "R", Message = "To Nick", CreatedByUserId = 3, RecipientUserId = 1, ManagerUserId = 5, CardStatus = "ACC", DateCreated = DateTime.Now},
+                new Card() { LetterValue = "E", Message = "To Nick Again", CreatedByUserId = 3, RecipientUserId = 1, ManagerUserId = 5, CardStatus = "PAC", DateCreated = DateTime.Now }
+                );
         }
     }
 }

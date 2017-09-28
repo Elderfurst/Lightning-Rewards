@@ -17,7 +17,7 @@ namespace Lightning_Rewards.Managers
         public Dashboard GetDashboard(long userId)
         {
             Dictionary<string, int> letters = new Dictionary<string, int>();
-            var cards = _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "A");
+            var cards = _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "ACC");
             foreach (var card in cards)
             {
                 if (letters.ContainsKey(card.LetterValue))
@@ -31,8 +31,8 @@ namespace Lightning_Rewards.Managers
             }
             var dashboard = new Dashboard
             {
-                UnapprovedCards = _db.Cards.Count(c => c.ManagerUserId == userId && c.CardStatus == "PA"),
-                UnclaimedCards = _db.Cards.Count(c => c.RecipientUserId == userId && c.CardStatus == "PACC"),
+                UnapprovedCards = _db.Cards.Count(c => c.ManagerUserId == userId && c.CardStatus == "PAP"),
+                UnclaimedCards = _db.Cards.Count(c => c.RecipientUserId == userId && c.CardStatus == "PAC"),
                 Letters = letters
             };
 

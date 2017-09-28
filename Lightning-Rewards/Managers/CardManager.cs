@@ -16,7 +16,7 @@ namespace Lightning_Rewards.Managers
         }
         public IQueryable<Card> GetPendingCardDetails(int userId)
         {
-            return _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "PACC");
+            return _db.Cards.Where(c => c.RecipientUserId == userId && c.CardStatus == "PAC");
         }
     }
 }
