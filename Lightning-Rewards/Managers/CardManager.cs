@@ -21,7 +21,8 @@ namespace Lightning_Rewards.Managers
                 Id = c.Id,
                 Message = c.Message,
                 LetterValue = c.LetterValue,
-                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName
+                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName,
+                ReceiverName = c.ReceivedByUser.FirstName + " " + c.ReceivedByUser.LastName
             });
         }
 
@@ -32,7 +33,8 @@ namespace Lightning_Rewards.Managers
                 Id = c.Id,
                 Message = c.Message,
                 LetterValue = c.LetterValue,
-                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName
+                SenderName = c.CreatedByUser.FirstName + " " + c.CreatedByUser.LastName,
+                ReceiverName = c.ReceivedByUser.FirstName + " " + c.ReceivedByUser.LastName
             });
         }
 
